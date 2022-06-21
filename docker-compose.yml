@@ -1,0 +1,32 @@
+version: "3.8"
+x-default-service-common: &default-service-common
+  restart: unless-stopped
+  networks:
+    - frontend
+    - shared
+
+services:
+
+  ipp-merchantadmin:
+    <<: *default-service-common
+    image: php:8.0-apache
+    build: .
+    ports:
+      - "9010:80"
+    volumes:
+      - ../MerchantPortal/:/var/www/html:rw
+      - ./apache/apache2.conf:/etc/apache2/apache2.conf
+      - ./apache/virtual.conf:/etc/apache2/sites-enabled/demo.conf
+    networks:
+      shared:
+        aliases:
+          - ipp-merchantadmin
+      frontend:
+        aliases:
+          - ipp-merchantadmin
+
+networks:
+  shared:
+    name: smpa-network
+  frontend:
+    name: ipp-network
