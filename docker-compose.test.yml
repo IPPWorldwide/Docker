@@ -27,10 +27,10 @@ services:
 
   tests:
     <<: *default-service-common
-    image: https://github.com/IPPWorldwide/IntegrationTestTests.git:main
+    build: https://github.com/IPPWorldwide/IntegrationTestTests.git#main
+    image: testcases
     depends_on:
       - ipp-merchantadmin
-    restart: no:0
     environment:
       TEST_URL: http://ipp-merchantadmin/
     networks:
@@ -39,10 +39,9 @@ services:
           - tests
     command: bash -c "
       sleep 10 &&
-      ./vendor/bin/phpunit --verbose tests
+      cd /var/www/html/IntegrationTestTests-main &&
+      ./vendor/bin/phpunit --verbose test
       "
 networks:
-  shared:
-    name: smpa-network
   frontend:
     name: ipp-network
