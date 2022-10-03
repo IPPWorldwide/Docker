@@ -38,8 +38,8 @@ services:
         aliases:
           - tests
     command: bash -c "
-      wait-for-it.sh ipp-merchantadmin:9000 -t 180 &&
-      ./vendor/bin/phpunit testcase.php
+      wait-for-it.sh ipp-merchantadmin:9010 -t 180 &&
+      ./vendor/bin/phpunit --verbose tests
       "
 networks:
   shared:
