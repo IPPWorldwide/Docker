@@ -8,12 +8,11 @@ services:
 
   ipp-merchantadmin:
     <<: *default-service-common
-    image: php:8.0-apache
-    build: .
+    image: https://github.com/IPPWorldwide/IntegrationTestMerchantPortal.git#main
+    build: merchantadmin
     ports:
       - "9010:80"
     volumes:
-      - ../MerchantPortal/:/var/www/html:rw
       - ./apache/apache2.conf:/etc/apache2/apache2.conf
       - ./apache/virtual.conf:/etc/apache2/sites-enabled/demo.conf
     networks:
