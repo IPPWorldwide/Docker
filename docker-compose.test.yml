@@ -1,0 +1,48 @@
+version: "3.8"
+x-default-service-common: &default-service-common
+  restart: unless-stopped
+  networks:
+    - frontend
+    - shared
+
+services:
+
+  ipp-merchantadmin:
+    <<: *default-service-common
+    image: php:8.0-apache
+    build: .
+    ports:
+      - "9010:80"
+    volumes:
+      - ../MerchantPortal/:/var/www/html:rw
+      - ./apache/apache2.conf:/etc/apache2/apache2.conf
+      - ./apache/virtual.conf:/etc/apache2/sites-enabled/demo.conf
+    networks:
+      shared:
+        aliases:
+          - ipp-merchantadmin
+      frontend:
+        aliases:
+          - ipp-merchantadmin
+
+  tests:
+    <<: *default-service-common
+    image: docker.pkg.github.com//ippworldwide/integrationtesttests/integrationtesttests:main
+    depends_on:
+      - http
+    restart: no:0
+    environment:
+      TEST_URL: http://ipp-merchantadmin/
+    networks:
+      shared:
+        aliases:
+          - tests
+    command: bash -c "
+      wait-for-it.sh ipp-merchantadmin:9000 -t 180 &&
+      ./vendor/bin/phpunit testcase.php
+      "
+networks:
+  shared:
+    name: smpa-network
+  frontend:
+    name: ipp-network
