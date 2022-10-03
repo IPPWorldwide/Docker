@@ -3,7 +3,6 @@ x-default-service-common: &default-service-common
   restart: unless-stopped
   networks:
     - frontend
-    - shared
 
 services:
 
@@ -18,9 +17,6 @@ services:
       - ./apache/apache2.conf:/etc/apache2/apache2.conf
       - ./apache/virtual.conf:/etc/apache2/sites-enabled/demo.conf
     networks:
-      shared:
-        aliases:
-          - ipp-merchantadmin
       frontend:
         aliases:
           - ipp-merchantadmin
@@ -34,7 +30,7 @@ services:
     environment:
       TEST_URL: http://ipp-merchantadmin/
     networks:
-      shared:
+      frontend:
         aliases:
           - tests
     command: bash -c "
