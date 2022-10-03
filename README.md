@@ -49,7 +49,7 @@ docker-compose -f docker-compose-test.yml down --rmi all -v
    `Cd {path/to/api}`
    
 - Login using your Github username and the token you have created as password. NOTICE: when asked for a password, you need to enter your personal access token instead.
-    docker build -t VolourApp/api:develop docker
+    docker build -t ippworldwide/merchantportal:develop docker
 - In the Docker folder copy the “.env.example” and rename it to .env
 - Go a step further in, to enter the docker folder using following command:
  
