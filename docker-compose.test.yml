@@ -27,7 +27,7 @@ services:
 
   tests:
     <<: *default-service-common
-    image: ghcr.io/ippworldwide/integrationtesttests/integrationtesttests:main
+    image: https://github.com/IPPWorldwide/IntegrationTestTests.git:main
     depends_on:
       - ipp-merchantadmin
     restart: no:0
