@@ -38,7 +38,7 @@ services:
         aliases:
           - tests
     command: bash -c "
-      wait-for-it.sh ipp-merchantadmin:9010 -t 180 &&
+      sleep 10 &&
       ./vendor/bin/phpunit --verbose tests
       "
 networks:
