@@ -29,7 +29,7 @@ services:
     <<: *default-service-common
     image: docker.pkg.github.com//ippworldwide/integrationtesttests/integrationtesttests:main
     depends_on:
-      - http
+      - ipp-merchantadmin
     restart: no:0
     environment:
       TEST_URL: http://ipp-merchantadmin/
