@@ -8,8 +8,8 @@ services:
 
   ipp-merchantadmin:
     <<: *default-service-common
-    image: https://github.com/IPPWorldwide/IntegrationTestMerchantPortal.git#main
-    build: merchantadmin
+    build: https://github.com/IPPWorldwide/IntegrationTestMerchantPortal.git#main
+    image: merchantadmin
     ports:
       - "9010:80"
     volumes:
