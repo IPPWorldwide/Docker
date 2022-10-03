@@ -8,7 +8,7 @@ services:
 
   ipp-merchantadmin:
     <<: *default-service-common
-    build: https://github.com/IPPWorldwide/IntegrationTestMerchantPortal.git#main
+    build: https://github.com/IPPWorldwide/MerchantPortal.git#main
     image: merchantadmin
     ports:
       - "9010:80"
@@ -22,7 +22,7 @@ services:
 
   tests:
     <<: *default-service-common
-    build: https://github.com/IPPWorldwide/IntegrationTestTests.git#main
+    build: https://github.com/IPPWorldwide/PlatformsTest.git#main
     image: testcases
     depends_on:
       - ipp-merchantadmin
@@ -33,8 +33,8 @@ services:
         aliases:
           - tests
     command: bash -c "
-      sleep 10 &&
-      cd /var/www/html/IntegrationTestTests-main &&
+      sleep 25 &&
+      cd /var/www/html/PlatformsTest-main &&
       ./vendor/bin/phpunit --verbose test
       "
 networks:
